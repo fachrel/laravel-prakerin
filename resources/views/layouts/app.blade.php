@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/simplebar@latest/dist/simplebar.css"
+    />
     @vite(['resources/css/app.css','resources/js/app.js', 'resources/js/dark.js'])
-    <title>Prakerin | @yield('tittle')</title>
+    <title>Prakerin | @yield('title')</title>
     <script>
 
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -16,7 +20,56 @@
 
         document.addEventListener('livewire:navigated', () => {
             initFlowbite();
-        })
+
+            var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            var themeToggleBtn = document.getElementById('theme-toggle');
+            var contentContainer = document.getElementById('content-container');
+
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    contentContainer.classList.add('dark-scrollbar');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    contentContainer.classList.remove('dark-scrollbar');
+                }
+                localStorage.setItem('color-theme', theme);
+            }
+
+            function updateIcon() {
+                if (localStorage.getItem('color-theme') === 'dark' || (!localStorage.getItem('color-theme') &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    themeToggleLightIcon.classList.remove('hidden');
+                    themeToggleDarkIcon.classList.add('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                }
+            }
+
+            updateIcon();
+
+            themeToggleBtn.addEventListener('click', function() {
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+
+                if (document.documentElement.classList.contains('dark')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+
+            window.addEventListener('beforeunload', function() {
+                if (!localStorage.getItem('color-theme')) {
+                    localStorage.setItem('color-theme', document.documentElement.classList.contains(
+                        'dark') ? 'dark' : 'light');
+                }
+            });
+
+            
+        });
 
 
 
@@ -25,8 +78,9 @@
 <body class="bg-gray-50 dark:bg-gray-900">
     <style>
         .fl-wrapper {
-         z-index: 30;
+         z-index: 60;
        }
+
      </style>
     @include('components.navbar')
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
@@ -37,5 +91,6 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 </body>
 </html>

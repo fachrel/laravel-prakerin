@@ -4,21 +4,20 @@ namespace App\Livewire\Forms;
 
 use Livewire\Form;
 use App\Models\User;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 
 class UserForm extends Form
 {
-    #[Rule('required|min:3|max:100')]
+    #[Validate('required|min:3|max:100')]
     public $name;
 
-    #[Rule('required|min:3|max:20')]
+    #[Validate('required|min:3|max:20|unique:users')]
     public $username;
 
-    #[Rule('required|email')]
+    #[Validate('required|email|unique:users')]
     public $email;
 
-    #[Rule('required|min:8|max:30')]
+    #[Validate('required|min:8|max:30')]
     public $password;
 
     public function save()
@@ -31,7 +30,7 @@ class UserForm extends Form
 
     public function update($id)
     {
-        $this->validate();
+        // $this->validate();
 
         $category = User::findOrFail($id);
         $category->update($this->all());
