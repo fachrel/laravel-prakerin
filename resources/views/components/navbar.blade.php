@@ -189,27 +189,30 @@
               <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-2" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1867px, 61px);">
                 <div class="px-4 py-3" role="none">
                   <p class="text-sm text-gray-900 dark:text-white" role="none">
-                    {{-- {{ Auth::user()->name }} --}}
+                    Nama : {{ Auth::user()->name }}
+                  </p>
+                  <p class="text-sm text-gray-900 dark:text-white" role="none">
+                    Username : {{ Auth::user()->username }}
                   </p>
                   <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                    as
-                    {{-- @foreach(Auth::user()->getRoleNames() as $v)
+                    sebagai
+                    @foreach(Auth::user()->getRoleNames() as $v)
                         <span>{{ $v }}</span>
-                    @endforeach --}}
+                    @endforeach
                   </p>
-                  <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                    {{-- {{ Auth::user()->email }} --}}
-                  </p>
+                  {{-- <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                    {{ Auth::user()->email }}
+                  </p> --}}
                 </div>
                 <ul class="py-1" role="none">
                   <li>
-                    <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                    <a wire:navigate href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
                   </li>
                   <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
+                    <a wire:navigate href="{{ url('settings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
                   </li>
                   <li>
-                    <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Log Out</a>
+                    <a wire:navigate href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Log Out</a>
                   </li>
                 </ul>
               </div>

@@ -24,16 +24,12 @@ class UserForm extends Form
     {
         $this->validate();
         User::create($this->all());
-        $this->reset();
-
     }
 
     public function update($id)
     {
-        // $this->validate();
-
-        $category = User::findOrFail($id);
-        $category->update($this->all());
+        $user = User::findOrFail($id);
+        $user->update($this->all());
 
         $this->reset();
     }

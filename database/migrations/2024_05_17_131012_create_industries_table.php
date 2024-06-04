@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('leader');
             $table->text('address');
             $table->string('phone');
-            $table->string('type_of_industry');
             $table->integer('quota');
+            $table->foreignId('major_id')->constrained();
+            $table->time('entry_time');
+            $table->time('exit_time');
             $table->string('status')->nullable();
             $table->timestamps();
         });

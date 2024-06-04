@@ -25,7 +25,7 @@
                           </li>
                         </ol>
                     </nav>
-                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Semua user</h1>
+                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Semua Industri</h1>
                 </div>
                 <div class="sm:flex">
                     <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
@@ -50,13 +50,10 @@
                         </div>
                     </div>
                     <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
-                        <button type="button" x-data @click="$dispatch('open-modal',{name:'users'})" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button type="button" x-data @click="$dispatch('open-modal',{name:'industry'})" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                            Tambah user
+                            Tambah Industri
                         </button>
-
-                        {{-- <button wire:click="$dispatch('openModal', { component: 'modals.user-modal' })">add User</button> --}}
-
                         <a href="#" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
                             <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
                             Export
@@ -79,13 +76,25 @@
                                         </div>
                                     </th>
                                     <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                        Name
+                                        Nama Industri
                                     </th>
                                     <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                        Username
+                                        Alamat
                                     </th>
                                     <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                        Role User
+                                        No HP
+                                    </th>
+                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        Jurusan
+                                    </th>
+                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        Kuota
+                                    </th>
+                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        Nama Pimpinan
+                                    </th>
+                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                        Jam Kerja
                                     </th>
                                     <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                         Status
@@ -96,7 +105,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                @foreach ($users as $user)
+                                @foreach ($industries as $industry)
 
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td class="w-4 p-4">
@@ -105,28 +114,33 @@
                                                 <label for="checkbox-1" class="sr-only">checkbox</label>
                                             </div>
                                         </td>
-                                        <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                            <img class="w-10 h-10 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil Sims avatar">
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->name }}</td>
+
+                                        {{-- <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
                                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                                <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $user->name }}</div>
-                                                <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ $user->email }}</div>
+                                                <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $industry->name }}</div>
                                             </div>
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $user->username }}</td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $user->getRoleNames()}}</td>
+                                        </td> --}}
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->address }}</td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->phone }}</td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->major->abbreviation }}</td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->countAcceptedRequests() }}/{{ $industry->quota }}</td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->leader }}</td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ \Carbon\Carbon::parse($industry->entry_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($industry->exit_time)->format('H:i') }}</td>
+
                                         <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                             <div class="flex items-center">
                                                 <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>  Active
                                             </div>
                                         </td>
                                         <td class="p-4 space-x-2 whitespace-nowrap">
-                                            <button x-data @click="$dispatch('open-modal',{name:'users'})" wire:click="$dispatch('edit-user', { id: {{ $user->id }} })" type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                                                Edit user
+                                            <button x-data @click="$dispatch('open-modal',{name:'industry'})" wire:click="$dispatch('edit-industry', { id: {{ $industry->id }} })" type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                                {{-- Edit industri --}}
                                             </button>
-                                            <button type="button" @click="$dispatch('delete-modal',{ name:'delete-user'})" wire:click="$dispatch('delete', { id: {{ $user->id }} })" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                                Delete user
+                                            <button type="button" @click="$dispatch('delete-modal',{ name:'delete-industry'})" wire:click="$dispatch('delete', { id: {{ $industry->id }} })" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                                {{-- Delete industri --}}
                                             </button>
                                         </td>
                                     </tr>
@@ -137,19 +151,19 @@
                 </div>
             </div>
         </div>
-        @if ($users->lastPage() > 1)
-            {{ $users->links('vendor.livewire.custom') }}
+        @if ($industries->lastPage() > 1)
+            {{ $industries->links('vendor.livewire.custom') }}
         @else
             <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Memperlihatkan
                     <span class="font-semibold text-gray-900 dark:text-white">
-                        @if ($users->total() == 0)
+                        @if ($industries->total() == 0)
                             0
                         @else
-                            {{ $users->firstItem() }}-{{ $users->lastItem() }}
+                            {{ $industries->firstItem() }}-{{ $industries->lastItem() }}
                         @endif
                     </span> dari <span class="font-semibold text-gray-900 dark:text-white">
-                        {{ $users->total() }}
+                        {{ $industries->total() }}
                     </span>
                 </span>
                 <div class="flex items-center space-x-3">
@@ -168,7 +182,7 @@
 
 
         {{-- Add and Edit User Modal --}}
-        <x-modal name="users" title="user" height="h-[500px]">
+        <x-modal name="industry" title="Industri" height="h-[820px]">
             <x-slot:body>
                 <form wire:submit.prevent="save" class="p-4 md:p-5">
                     <div class="grid gap-4 mb-4 grid-cols-2">
@@ -179,109 +193,154 @@
                                 @else
                                     text-gray-900 dark:text-white
                                 @endif">
-                                Nama
+                                Nama Industri
                             </label>
-                            <input wire:model.live="form.name" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama">
+                            <input wire:model.live="form.name" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Industri">
                             @error("form.name")
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
                             @enderror
                         </div>
-                        <div class="col-span-1">
-                            <label for="username" class="block mb-2 text-sm font-medium
-                                @if ($errors->has('form.username'))
+                        <div class="col-span-2">
+                            <label for="leader" class="block mb-2 text-sm font-medium
+                                @if ($errors->has('form.leader'))
                                     text-red-700 dark:text-red-500
                                 @else
                                     text-gray-900 dark:text-white
                                 @endif">
-                                Username
+                                Nama Pimpinan
                             </label>
-                            <input wire:model.live="form.username" type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username">
-                            @error("form.username")
+                            <input wire:model.live="form.leader" type="text" name="leader" id="leader" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pimpinan">
+                            @error("form.leader")
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
                             @enderror
                         </div>
-                        <div class="col-span-1">
-                            <label for="email" class="block mb-2 text-sm font-medium
-                                @if ($errors->has('form.email'))
+                        <div class="col-span-2">
+                            <label for="phone" class="block mb-2 text-sm font-medium
+                                @if ($errors->has('form.phone'))
                                     text-red-700 dark:text-red-500
                                 @else
                                     text-gray-900 dark:text-white
                                 @endif">
-                                Email
+                                Telepon
                             </label>
-                            <input wire:model.live="form.email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email">
-                            @error("form.email")
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 19 18">
+                                        <path d="M18 13.446a3.02 3.02 0 0 0-.946-1.985l-1.4-1.4a3.054 3.054 0 0 0-4.218 0l-.7.7a.983.983 0 0 1-1.39 0l-2.1-2.1a.983.983 0 0 1 0-1.389l.7-.7a2.98 2.98 0 0 0 0-4.217l-1.4-1.4a2.824 2.824 0 0 0-4.218 0c-3.619 3.619-3 8.229 1.752 12.979C6.785 16.639 9.45 18 11.912 18a7.175 7.175 0 0 0 5.139-2.325A2.9 2.9 0 0 0 18 13.446Z"/>
+                                    </svg>
+                                </div>
+                                <input wire:model.live="form.phone" name="phone" type="text" id="phone" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 ps-10 p-2.5 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-456-7890" />
+                            </div>
+                            @error("form.phone")
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
                             @enderror
                         </div>
-                        @if ($userId)
-                            <div class="col-span-2">
-                                <label for="oldPassword" class="block mb-2 text-sm font-medium
-                                    @if ($errors->has('oldPassword'))
-                                        text-red-700 dark:text-red-500
-                                    @else
-                                        text-gray-900 dark:text-white
-                                    @endif">
-                                    Password lama
-                                </label>
-                                <input wire:model.live="oldPassword" type="password" name="oldPassword" id="oldPassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @error("oldPassword")
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
-                                @enderror
+                        <div class="col-span-2">
+                            <label for="major" class="block mb-2 text-sm font-medium
+                                @if ($errors->has('form.major_id'))
+                                    text-red-700 dark:text-red-500
+                                @else
+                                    text-gray-900 dark:text-white
+                                @endif">
+                                Jurusan
+                            </label>
+                            <select id="major" wire:model.live="form.major_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @if (!$industryId)
+                                    <option selected>Pilih Jurusan</option>
+                                @endif
+                                @foreach ($majors as $major)
+                                    <option value="{{ $major->id }}"
+                                        @if ($major->id == $form->major_id)
+                                            selected
+                                        @endif>
+                                        {{ $major->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error("form.major_id")
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="col-span-1">
+                            <label for="entry_time" class="block mb-2 text-sm font-medium
+                                @if ($errors->has('form.entry_time'))
+                                    text-red-700 dark:text-red-500
+                                @else
+                                    text-gray-900 dark:text-white
+                                @endif">
+                                Jam Masuk
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <input type="time" wire:model.live="form.entry_time" id="entry_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                             </div>
-                            <div class="col-span-2">
-                                <label for="newPassword" class="block mb-2 text-sm font-medium
-                                    @if ($errors->has('newPassword'))
-                                        text-red-700 dark:text-red-500
-                                    @else
-                                        text-gray-900 dark:text-white
-                                    @endif">
-                                    Password
-                                </label>
-                                <input wire:model.live="newPassword" type="password" name="newPassword" id="oldPassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @error("newPassword")
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
-                                @enderror
+                            @error("form.entry_time")
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="col-span-1">
+                            <label for="exit_time" class="block mb-2 text-sm font-medium
+                                @if ($errors->has('form.exit_time'))
+                                    text-red-700 dark:text-red-500
+                                @else
+                                    text-gray-900 dark:text-white
+                                @endif">
+                                Jam Pulang
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <input type="time" wire:model.live="form.exit_time" id="exit_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                             </div>
-                        @else
-                            <div class="col-span-2">
-                                <label for="password" class="block mb-2 text-sm font-medium
-                                    @if ($errors->has('form.password'))
-                                        text-red-700 dark:text-red-500
-                                    @else
-                                        text-gray-900 dark:text-white
-                                    @endif">
-                                    Password
-                                </label>
-                                <input wire:model.live="form.password" type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @error("form.password")
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
-                                @enderror
-                            </div>
-                            <div class="col-span-2">
-                                <label for="confirmPassword" class="block mb-2 text-sm font-medium
-                                    @if ($errors->has('confirmPassword'))
-                                        text-red-700 dark:text-red-500
-                                    @else
-                                        text-gray-900 dark:text-white
-                                    @endif">
-                                    Konfirmasi Password
-                                </label>
-                                <input type="password" wire:model.live="confirmPassword" name="confirmPassword" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @error("confirmPassword")
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
-                                @enderror
-                            </div>
-                        @endif
+                            @error("form.exit_time")
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="col-span-2">
+                            <label for="quota" class="block mb-2 text-sm font-medium
+                                @if ($errors->has('form.quota'))
+                                    text-red-700 dark:text-red-500
+                                @else
+                                    text-gray-900 dark:text-white
+                                @endif">
+                                Kuota
+                            </label>
+                            <input wire:model.live="form.quota" type="number" name="quota" id="quota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="kuota">
+                            @error("form.quota")
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="col-span-2">
+                            <label for="quota" class="block mb-2 text-sm font-medium
+                                @if ($errors->has('form.address'))
+                                    text-red-700 dark:text-red-500
+                                @else
+                                    text-gray-900 dark:text-white
+                                @endif">
+                                Alamat
+                            </label>
+                            <textarea wire:model.live="form.address" id="address" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat industri..."></textarea>
+                            @error("form.address")
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops! </span>{{$message}}</p>
+                            @enderror
+                        </div>
+
 
 
 
                     </div>
-                    <button type="submit" class="text-white inline-flex items-center {{ $userId ? 'bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-600' : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' }} focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    <button type="submit" class="text-white inline-flex items-center {{ $industryId ? 'bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-600' : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' }} focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>
-                        {{ $userId ? 'Update' : 'Tambah' }} User
+                        {{ $industryId ? 'Update' : 'Tambah' }} Industri
                         {{-- <div wire:loading>
                             <div role="status">
                                 <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -299,7 +358,7 @@
         </x-modal>
 
         {{-- Delete User Modal --}}
-        <x-delete-modal name="delete-user" />
+        <x-delete-modal name="delete-industry" />
 
     </main>
 </div>

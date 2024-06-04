@@ -21,6 +21,8 @@ class UsersPage extends Component
     public $search;
     public UserForm $form;
     public $modalHeight;
+    public $userId;
+    public $deleteId;
 
     #[Validate('required|min:8|max:30')]
     public $confirmPassword;
@@ -30,14 +32,16 @@ class UsersPage extends Component
 
     #[Validate('required|min:8|max:30')]
     public $newPassword;
-
-    public $userId;
-    public $deleteId;
-
+    public function rules()
+    {
+        return [
+            'confirmPassword' => 'required|min:8|max:30',
+        ];
+    }
     public function save()
     {
-        if ($this->userId) {
 
+        if ($this->userId) {
             $user = User::find($this->userId);
             if (Auth::attempt(['username' => $user->username, 'password'=> $this->oldPassword])) {
                 $this->form->password = $this->newPassword;
@@ -51,9 +55,13 @@ class UsersPage extends Component
                 ]);
             }
         }else{
-            $this->validate();
             if($this->form->password == $this->confirmPassword) {
                 $this->form->save();
+                $user = User::where('email', $this->form->email)->first();
+                if ($user) {
+                    $user->assignRole('admin');
+                    $this->form->reset();
+                }
                 $this->dispatch('render-users');
                 $this->dispatch('close-modal');
                 flash()->addSuccess('User berhasil ditambahkan.');
@@ -74,7 +82,6 @@ class UsersPage extends Component
             'name' => $user->name,
             'username' => $user->username,
             'email' => $user->email,
-            // 'password' => $user->password,
         ]);
 
     }
@@ -94,12 +101,10 @@ class UsersPage extends Component
             $user->delete();
             $this->dispatch('render-users');
             $this->dispatch('close-modal');
-            // request()->session()->flash('success', __('User berhasil ditambahkan.'));
-
-            flash()->addSuccess('Barang berhasil dihapus.');
+            flash()->addSuccess('User berhasil dihapus.');
         } else {
             $this->dispatch('close-modal');
-            flash()->addError('Barang tidak ditemukan.');
+            flash()->addError('User tidak ditemukan.');
         }
     }
 
