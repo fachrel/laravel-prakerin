@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Major;
+use App\Models\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -27,6 +29,10 @@ class Teacher extends Model
     public function major(): BelongsTo
     {
         return $this->belongsTo(Major::class);
+    }
+    public function requests(): HasMany
+    {
+        return $this->hasMany(Request::class);
     }
 
     public function scopeSearch($query, $value)

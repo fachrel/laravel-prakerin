@@ -17,10 +17,10 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Dashboard</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white mb-6">Dashboard</h1>
         </div>
 
-        @hasrole('admin|superadmin')
+        {{-- @hasrole('admin|superadmin')
             <!-- Card Section -->
             <div class="max-w-full py-10 lg:py-3 mx-auto">
                 <!-- Grid -->
@@ -128,7 +128,7 @@
                 <!-- End Grid -->
             </div>
             <!-- End Card Section -->
-        @endhasrole
+        @endhasrole --}}
 
         @hasrole('student|teacher')
             <div class="max-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Request;
 use App\Models\Student;
 use App\Models\Teacher;
 use Spatie\Permission\Traits\HasRoles;
@@ -55,6 +56,11 @@ class User extends Authenticatable
         return $this->hasMany(Student::class);
     }
 
+    public function requests(): HasMany
+    {
+        return $this->hasMany(Request::class);
+    }
+
     public function teachers(): HasMany
     {
         return $this->hasMany(Teacher::class);
@@ -66,5 +72,5 @@ class User extends Authenticatable
             $query->where('name', 'like', '%' . $value . '%')->orWhere('username', 'like', '%' . $value . '%')->orWhere('email', 'like', '%' . $value . '%');
         }
     }
-    
+
 }

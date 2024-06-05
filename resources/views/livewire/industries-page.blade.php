@@ -1,4 +1,6 @@
 <div>
+    @php use Illuminate\Support\Str; @endphp
+
     <main>
         <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
             <div class="w-full mb-1">
@@ -54,10 +56,6 @@
                             <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                             Tambah Industri
                         </button>
-                        <a href="#" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
-                            <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
-                            Export
-                        </a>
                     </div>
                 </div>
             </div>
@@ -115,24 +113,25 @@
                                             </div>
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->name }}</td>
-
-                                        {{-- <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                            <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                                <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $industry->name }}</div>
-                                            </div>
-                                        </td> --}}
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->address }}</td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ Str::limit($industry->address, 50, '...') }}</td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->phone }}</td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->major->abbreviation }}</td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->countAcceptedRequests() }}/{{ $industry->quota }}</td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $industry->leader }}</td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ \Carbon\Carbon::parse($industry->entry_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($industry->exit_time)->format('H:i') }}</td>
-
-                                        <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                            <div class="flex items-center">
-                                                <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>  Active
-                                            </div>
-                                        </td>
+                                        @if ($industry->countAcceptedRequests() >= $industry->quota)
+                                            <td class="whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Terpenuhi
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td class="whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Tersedia
+                                                </div>
+                                            </td>
+                                        @endif
                                         <td class="p-4 space-x-2 whitespace-nowrap">
                                             <button x-data @click="$dispatch('open-modal',{name:'industry'})" wire:click="$dispatch('edit-industry', { id: {{ $industry->id }} })" type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>

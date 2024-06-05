@@ -57,10 +57,6 @@
 
                         {{-- <button wire:click="$dispatch('openModal', { component: 'modals.user-modal' })">add User</button> --}}
 
-                        <a href="#" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
-                            <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
-                            Export
-                        </a>
                     </div>
                 </div>
             </div>
@@ -117,7 +113,7 @@
                                             </div>
                                         </td>
                                         <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                            <img class="w-10 h-10 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil Sims avatar">
+                                            <img class="w-10 h-10 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="Neil Sims avatar">
                                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                                                 <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $student->user->name }}</div>
                                                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ $student->user->email }}</div>
@@ -542,10 +538,18 @@
                         </ol>
 
 
-                        <div class="grid gap-4 mb-4 grid-cols-2">
-
+                        <div class="">
+                            <p class="font-semibold text-gray-900 dark:text-white">Nama : <span class="font-normal">{{ $form->name }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">Username : <span class="font-normal">{{ $form->username }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">Email : <span class="font-normal">{{ $form->email }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">NIS : <span class="font-normal">{{ $studentForm->NIS }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">NISN : <span class="font-normal">{{ $studentForm->NISN }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">Jenis Kelamin : <span class="font-normal">{{ $studentForm->gender }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">Jurusan : <span class="font-normal">{{ $studentForm->major_id }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">Tahun Masuk : <span class="font-normal">{{ $studentForm->enrollment_year }}</span> </p>
+                            <p class="font-semibold text-gray-900 dark:text-white">Kelas : <span class="font-normal">{{ $studentForm->group }}</span> </p>
                         </div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between mt-[128px]">
                             <a wire:click="decrement" class="cursor-pointer	 inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>

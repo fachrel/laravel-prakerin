@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('phone');
             $table->integer('quota');
             $table->foreignId('major_id')->constrained();
-            $table->time('entry_time');
-            $table->time('exit_time');
+            $table->time('entry_time')->nullable()->default(null);
+            $table->time('exit_time')->nullable()->default(null);
             $table->string('status')->nullable();
             $table->timestamps();
         });

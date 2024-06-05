@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('industry_id')->constrained();
             $table->time('entry_time');
             $table->time('exit_time');
             $table->enum('status', ['sick','leave','absent'])->nullable();

@@ -76,7 +76,6 @@
         .fl-wrapper {
          z-index: 60;
        }
-
      </style>
     @include('components.navbar')
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">

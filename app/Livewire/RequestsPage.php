@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Request;
+use App\Models\Teacher;
 use Livewire\Component;
 use App\Models\Industry;
 use Livewire\Attributes\On;
@@ -16,13 +17,14 @@ class RequestsPage extends Component
     use WithPagination;
 
     public $request;
+    public $teacher;
     public $industryId;
+    public $selectedIndustry;
+    public $selectedRequest;
     public $requestId;
 
     public function request_pkl()
     {
-        // dd('msk');
-
         Request::create([
             'user_id' => Auth::id(),
             'industry_id' => $this->industryId,
@@ -38,7 +40,9 @@ class RequestsPage extends Component
     public function update($id)
     {
         $this->industryId = $id;
+        $this->selectedIndustry = Industry::find($id);
     }
+
 
 
     // admin side
@@ -46,9 +50,10 @@ class RequestsPage extends Component
     public function proccess($id)
     {
         $this->requestId = $id;
-        $request = Request::find($id);
-        if($request->status == 'pending'){
-            $request->update([
+        $this->selectedRequest = Request::find($id);
+        $this->teacher = $this->selectedRequest->teacher_id;
+        if($this->selectedRequest->status == 'pending'){
+            $this->selectedRequest->update([
                 'status' => 'process',
             ]);
         }
@@ -58,9 +63,16 @@ class RequestsPage extends Component
     public function accept()
     {
         $request = Request::find($this->requestId);
+        if($request->status == 'accepted'){
+            $request->update([
+                'teacher_id' => (int)$this->teacher,
+            ]);
+        }
+
         if($request->status == 'process'){
             $request->update([
                 'status' => 'accepted',
+                'teacher_id' => (int)$this->teacher,
             ]);
         }
         $this->dispatch('close-modal');
@@ -76,16 +88,52 @@ class RequestsPage extends Component
             ]);
         }
         $this->dispatch('close-modal');
+    }
 
+    #[On('relist-request')]
+    public function relist($id)
+    {
+        $this->requestId = $id;
+        $request = Request::find($this->requestId);
+        $request->delete();
+        // if($request->status == 'rejected'){
+        //     $request->update([
+        //         'status' => 'relisted',
+        //     ]);
+        // }
     }
 
     #[On('render-request')]
     public function render()
     {
+        $user = Auth::user();
+        $industries = collect();
+
+        // Retrieve the authenticated user's students
+        $students = $user->students;
+
+        // Collect all the unique major IDs from the user's students
+        $majorIds = $students->pluck('major_id')->unique();
+
+        // If there are major IDs, fetch the industries related to those major IDs
+        if ($majorIds->isNotEmpty()) {
+            $industries = Industry::whereIn('major_id', $majorIds)->paginate(10);
+        }
+
+        $teacher = Auth::user()->teachers->first();
+
+        if ($teacher) {
+            $teacherStudentCompanions = Request::where('teacher_id', $teacher->id)->paginate(10);
+        } else {
+            $teacherStudentCompanions = collect(); // No teacher found, return empty collection
+        }
+
         $this->request = Request::where('user_id', Auth::id())->get();
         return view('livewire.requests-page', [
-            'industries' => Industry::paginate(10),
+            'industries' => $industries,
             'requests' => Request::paginate(20),
+            'teachers' => Teacher::get(),
+            'teacherStudentCompanions' => $teacherStudentCompanions,
         ]);
     }
 }

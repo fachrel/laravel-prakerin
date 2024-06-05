@@ -5,7 +5,7 @@
           <ul class="pb-2 space-y-2">
             <div class="w-full max-w-sm bg-white rounded-lg dark:bg-gray-800">
                 <div class="flex flex-col items-center pb-5 border-b border-gray-200 dark:border-gray-700">
-                    <img class="w-24 h-24 mb-3 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
+                    <img class="w-24 h-24 mb-3 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="Bonnie image"/>
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</h5>
                     <span class="text-sm text-gray-500 dark:text-gray-400">
                         @foreach(Auth::user()->getRoleNames() as $v)
@@ -86,7 +86,7 @@
                     </a>
                 </li>
             @endrole
-            
+
             @hasrole('student|teacher|superadmin')
                 <li>
                     <a wire:navigate href="{{ url('/attendances') }}" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
@@ -97,7 +97,7 @@
                         <span class="ml-3" sidebar-toggle-item="">Absensi Siswa</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a wire:navigate href="{{ url('/journals') }}" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                         <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
@@ -105,7 +105,7 @@
 
                         <span class="ml-3" sidebar-toggle-item="">Jurnal Harian Siswa</span>
                     </a>
-                </li>
+                </li> --}}
             @endhasrole
 
 

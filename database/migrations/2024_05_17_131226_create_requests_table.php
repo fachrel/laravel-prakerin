@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('industry_id')->constrained();
             $table->foreignId('teacher_id')->nullable()->constrained();
-            $table->enum('status', ['pending','process','accepted','rejected'])->default('pending');
+            $table->enum('status', ['pending','process','accepted','rejected','relisted'])->default('pending');
             $table->string('notes')->nullable();
             $table->timestamps();
         });

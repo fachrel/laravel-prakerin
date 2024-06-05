@@ -57,10 +57,6 @@
 
                         {{-- <button wire:click="$dispatch('openModal', { component: 'modals.user-modal' })">add User</button> --}}
 
-                        <a href="#" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">
-                            <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path></svg>
-                            Export
-                        </a>
                     </div>
                 </div>
             </div>
@@ -106,14 +102,17 @@
                                             </div>
                                         </td>
                                         <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                            <img class="w-10 h-10 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil Sims avatar">
+                                            <img class="w-10 h-10 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="Neil Sims avatar">
                                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                                                 <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $user->name }}</div>
                                                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ $user->email }}</div>
                                             </div>
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $user->username }}</td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $user->getRoleNames()}}</td>
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @foreach($user->getRoleNames() as $v)
+                                                <span>{{ $v }}</span>
+                                            @endforeach</td>
                                         <td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                             <div class="flex items-center">
                                                 <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>  Active
